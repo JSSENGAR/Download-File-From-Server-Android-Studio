@@ -1,0 +1,54 @@
+Download File From Server, Android Studio Example
+
+Step 1: Add Button To activity_main.xml
+
+
+ <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Download"
+        tools:layout_editor_absoluteX="167dp"
+        tools:layout_editor_absoluteY="252dp"
+        tools:ignore="MissingConstraints" />
+
+
+
+Step 2: Paste Entire Code Just Down Package Instruction
+
+//package com.example.dowloadsfjssapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.DownloadManager;
+import android.content.Context;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button btn;
+    DownloadManager dm;
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        btn= (Button) findViewById(R.id.button);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dm=(DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                Uri uri= Uri.parse("https://github.com/JSSENGAR/ListView-Position-In-Android/archive/master.zip");
+                DownloadManager.Request req=new DownloadManager.Request(uri);
+                req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                Long reference= dm.enqueue(req);
+            }
+        });
+
+
+    }
+} 
